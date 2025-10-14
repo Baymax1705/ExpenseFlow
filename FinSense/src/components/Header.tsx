@@ -3,23 +3,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [username] = useState("John Doe");
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
-      setUsername("John Doe");
     }
 
     const handleUserAuthenticated = () => {
       const updatedToken = localStorage.getItem("token");
       if (updatedToken) {
         setIsAuthenticated(true);
-        setUsername("John Doe");
       }
     };
 
@@ -29,6 +30,17 @@ export default function Header() {
       window.removeEventListener("userAuthenticated", handleUserAuthenticated);
     };
   }, []);
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setShowDropdown(false);
+    router.push("/");
+  };
 
   return (
     <header className="w-full bg-white text-slate-800 border-b border-slate-100">
@@ -46,11 +58,33 @@ export default function Header() {
         </div>
 
         {isAuthenticated ? (
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-slate-700 font-medium">{username}</span>
-            <div className="bg-slate-200 rounded-full w-8 h-8 flex items-center justify-center">
+          <div className="relative flex items-center gap-5">
+            <span className="text-lg font-bold text-slate-700">{username}</span>
+            <div
+              className="bg-slate-200 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+              onClick={toggleDropdown}
+            >
               <span className="text-sm font-medium text-slate-700">J</span>
             </div>
+            {showDropdown && (
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-lg">
+                <ul className="py-2">
+                  <li
+                    className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
+                    onClick={() => router.push("/dashboard/profile")}
+                  >
+                    Profile
+                  </li>
+                  <li className="px-4 py-2 hover:bg-slate-100 cursor-pointer">Chat with us</li>
+                  <li
+                    className="px-4 py-2 hover:bg-slate-100 cursor-pointer text-red-500"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         ) : (
           <nav className="flex items-center gap-3">

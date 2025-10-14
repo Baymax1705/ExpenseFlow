@@ -77,7 +77,7 @@ export default function Dashboard() {
   const monthRecent: { id: number; label: string; amount: number; date: string; category: string }[] = monthData.recent;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-800 px-8">
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between gap-6 mb-8">
           <div className="flex items-center gap-4">
