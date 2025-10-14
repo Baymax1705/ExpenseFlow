@@ -12,7 +12,9 @@ export default function Header() {
             <Image src="/logo-mark.svg" alt="FinSense" width={40} height={40} />
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">FinSense</h1>
+            <h1 className="text-2xl font-bold tracking-tight">
+              <Link href="/dashboard">FinSense</Link>
+            </h1>
             <p className="text-xs text-slate-500">Expense Pattern Analyzer</p>
           </div>
         </div>
