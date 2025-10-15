@@ -74,6 +74,27 @@ export default function AddExpense() {
         return;
       }
 
+      const expenseData = {
+        userId, // Include userId in the payload
+        date,
+        amount: Number(amount),
+        merchant,
+        category,
+        notes,
+        recurring,
+      };
+
+      // API call to save the expense to the backend
+      await axios.post(
+        `${API_BASE_URL}/api/auth/addexpense`,
+        expenseData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (recurring) {
         setRecurringExpenses((prev) => [
           ...prev,
