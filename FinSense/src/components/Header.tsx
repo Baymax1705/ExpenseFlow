@@ -42,6 +42,11 @@ export default function Header() {
     router.push("/");
   };
 
+  const handleMenuClick = (path: string) => {
+    setShowDropdown(false);
+    router.push(path);
+  };
+
   return (
     <header className="w-full bg-white text-slate-800 border-b border-slate-100">
       <div className="max-w-7xl mx-auto p-4 flex items-center justify-between">
@@ -71,11 +76,16 @@ export default function Header() {
                 <ul className="py-2">
                   <li
                     className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
-                    onClick={() => router.push("/dashboard/profile")}
+                    onClick={() => handleMenuClick("/dashboard/profile")}
                   >
                     Profile
                   </li>
-                  <li className="px-4 py-2 hover:bg-slate-100 cursor-pointer">Chat with us</li>
+                  <li
+                    className="px-4 py-2 hover:bg-slate-100 cursor-pointer"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    Chat with us
+                  </li>
                   <li
                     className="px-4 py-2 hover:bg-slate-100 cursor-pointer text-red-500"
                     onClick={handleLogout}

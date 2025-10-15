@@ -1,5 +1,32 @@
 import mongoose from 'mongoose';
 
+const expenseSchema = new mongoose.Schema({
+  date: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  merchant: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  notes: {
+    type: String,
+    default: '',
+  },
+  recurring: {
+    type: Boolean,
+    required: true,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,12 +41,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  expenses: [expenseSchema], // Embedded array of expenses
 });
 
-const User = mongoose.model('User', userSchema);
-
-export default User;
+export default mongoose.model('User', userSchema);

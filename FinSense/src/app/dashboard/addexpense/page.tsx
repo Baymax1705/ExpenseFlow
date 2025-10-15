@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function AddExpense() {
   const [date, setDate] = useState<string>(new Date().toISOString().slice(0, 10));
@@ -12,6 +13,7 @@ export default function AddExpense() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [recurringExpenses, setRecurringExpenses] = useState<Array<{ amount: number; merchant: string; category: string }>>([]);
+  const [showPopup, setShowPopup] = useState(false); // State for popup visibility
 
   useEffect(() => {
     // Load recurring expenses from localStorage
@@ -30,41 +32,74 @@ export default function AddExpense() {
     e.preventDefault();
     setError("");
 
-    if (!amount || Number(amount) <= 0 || !merchant.trim()) {
-      setError("Please enter valid merchant and amount.");
+    if (!amount || Number(amount) <= 0 || !merchant.trim() || !date || !category || !notes.trim()) {
+      setError("All fields are required.");
       return;
     }
 
     setLoading(true);
-    const expense = {
-      date,
-      amount: Number(amount),
-      merchant,
-      category,
-      notes,
-      recurring,
-    };
 
-    if (recurring) {
-      setRecurringExpenses((prev) => [
-        ...prev,
-        { amount: Number(amount), merchant, category },
-      ]);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User not authenticated.");
+      setLoading(false);
+      return;
     }
 
-    // Simulate network
-    await new Promise((r) => setTimeout(r, 700));
+    try {
+      // Decode the token and fetch the id field
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const userId = payload.id; // Extract `id` from the token payload
 
-    console.log("Saved expense (mock)", expense);
-    setLoading(false);
+      if (!userId) {
+        setError("User ID not found in token.");
+        setLoading(false);
+        return;
+      }
 
-    // Clear the form
-    setDate(new Date().toISOString().slice(0, 10));
-    setAmount("");
-    setMerchant("");
-    setCategory("Food");
-    setNotes("");
-    setRecurring(false);
+      const expense = {
+        userId, // Include userId in the payload
+        date,
+        amount: Number(amount),
+        merchant,
+        category,
+        notes,
+        recurring,
+      };
+
+      const response = await axios.post("http://localhost:5000/api/auth/addexpense", expense, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (recurring) {
+        setRecurringExpenses((prev) => [
+          ...prev,
+          { amount: Number(amount), merchant, category },
+        ]);
+      }
+
+      // Show popup notification
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000); // Hide popup after 3 seconds
+
+      // Clear the form
+      setDate(new Date().toISOString().slice(0, 10));
+      setAmount("");
+      setMerchant("");
+      setCategory("Food");
+      setNotes("");
+      setRecurring(false);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || "An error occurred while saving the expense.");
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   function removeRecurringExpense(index: number) {
@@ -89,7 +124,7 @@ export default function AddExpense() {
                 {recurringExpenses.map((expense, index) => (
                   <div
                     key={index}
-                    className="p-3 rounded-lg bg-slate-50 border border-gray-400 flex items-center justify-between hover:shadow-mdz"
+                    className="p-3 rounded-lg bg-slate-50 border border-gray-400 flex items-center justify-between hover:shadow-md"
                   >
                     <div>
                       <div className="text-sm font-medium text-slate-700">{expense.merchant}</div>
@@ -224,6 +259,12 @@ export default function AddExpense() {
             </div>
           </section>
         </div>
+        {/* Popup Notification */}
+        {showPopup && (
+          <div className="fixed bottom-6 right-6 bg-teal-500 text-white px-4 py-2 rounded-lg shadow-lg">
+            Expense saved successfully!
+          </div>
+        )}
       </main>
     </div>
   );

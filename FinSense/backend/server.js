@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import addExpenseRoute from './routes/addExpense.js';
 import cors from 'cors';
 
 // Load environment variables
@@ -16,12 +17,12 @@ const app = express();
 app.use(express.json());
 
 // Middleware to log requests
-app.use((req, res, next) => {
-  console.log('Request Headers:', req.headers);
-  console.log('Request Method:', req.method);
-  console.log('Request URL:', req.url);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Request Headers:', req.headers);
+//   console.log('Request Method:', req.method);
+//   console.log('Request URL:', req.url);
+//   next();
+// });
 
 // Enable CORS
 app.use(cors({
@@ -32,6 +33,7 @@ app.use(cors({
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', addExpenseRoute);
 
 const PORT = process.env.PORT || 5000;
 
