@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import addExpenseRoute from './routes/addExpense.js';
 import recurringExpenseRoute from './routes/recurringExpense.js';
+import updateRecurringRoute from './routes/updateRecurring.js';
 import cors from 'cors';
 
 // Load environment variables
@@ -36,6 +37,7 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', addExpenseRoute);
 app.use('/api/auth', recurringExpenseRoute);
+app.use('/api/auth', updateRecurringRoute);
 
 const PORT = process.env.PORT || 5000;
 
