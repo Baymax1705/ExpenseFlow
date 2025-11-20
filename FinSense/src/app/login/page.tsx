@@ -47,6 +47,10 @@ export default function Login() {
       const { token } = await response.json();
       localStorage.setItem("token", token);
       setSuccess("Login successful! Redirecting...");
+      
+      // Dispatch custom event to notify header about authentication
+      window.dispatchEvent(new CustomEvent("userAuthenticated"));
+      
       setTimeout(() => {
         setLoading(false); // Ensure loading is reset before redirect
         router.push("/dashboard");

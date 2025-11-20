@@ -5,7 +5,7 @@ import User from "../models/userModel.js";
 const router = express.Router();
 
 // Route to fetch recurring expenses
-router.get("/recurring-expenses", async (req, res) => {
+router.get("/ ", async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {

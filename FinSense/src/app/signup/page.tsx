@@ -59,6 +59,10 @@ export default function Signup() {
       const { token } = await response.json();
       localStorage.setItem("token", token);
       setSuccess("Account created successfully! Redirecting...");
+      
+      // Dispatch custom event to notify header about authentication
+      window.dispatchEvent(new CustomEvent("userAuthenticated"));
+      
       setTimeout(() => {
         setLoading(false);
         router.push("/dashboard");
