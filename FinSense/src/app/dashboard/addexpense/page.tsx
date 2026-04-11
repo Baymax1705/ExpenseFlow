@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = "";
 
 export default function AddExpense() {
   const [date, setDate] = useState<string>(new Date().toISOString().slice(0, 10));
@@ -27,7 +27,7 @@ export default function AddExpense() {
       }
 
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/auth/recurring-expenses`, {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/recurringexpenses`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

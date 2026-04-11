@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaUser, FaCalendarAlt, FaRedo } from "react-icons/fa";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BACKEND_URL = "";
 
 interface RecurringExpense {
   _id?: string;

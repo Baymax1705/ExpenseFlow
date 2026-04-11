@@ -48,7 +48,7 @@ export default function PlanMonth() {
       const token = getAuthToken();
       if (!token) return;
 
-      const response = await fetch('http://localhost:5000/api/auth/plan-months', {
+      const response = await fetch('/api/auth/plan-months', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function PlanMonth() {
         const token = getAuthToken();
         if (!token) return;
 
-        const response = await fetch(`http://localhost:5000/api/auth/plan-month/${monthToFetch}`, {
+        const response = await fetch(`/api/auth/plan-month/${monthToFetch}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ export default function PlanMonth() {
         others: Number(catBudgets.others || 0),
       };
 
-      const response = await fetch('http://localhost:5000/api/auth/plan-month', {
+      const response = await fetch('/api/auth/plan-month', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -194,7 +194,7 @@ export default function PlanMonth() {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/api/auth/plan-month/${month}`, {
+      const response = await fetch(`/api/auth/plan-month/${month}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

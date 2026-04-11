@@ -13,7 +13,12 @@ export default function ChatsPage() {
   ]);
   const [newMessage, setNewMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ 
@@ -97,10 +102,10 @@ export default function ChatsPage() {
                       message.sender === "user" ? "text-teal-100" : "text-slate-500"
                     }`}
                   >
-                    {message.timestamp.toLocaleTimeString([], {
+                    {isMounted ? message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
-                    })}
+                    }) : ""}
                   </p>
                 </div>
               </div>
