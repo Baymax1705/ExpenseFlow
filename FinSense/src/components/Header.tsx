@@ -19,7 +19,7 @@ export default function Header() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const response = await fetch(`${BACKEND_URL}/api/auth/profile`, {
+        const response = await fetch(`${BACKEND_URL}/api/profile`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,

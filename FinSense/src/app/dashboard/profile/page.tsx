@@ -42,7 +42,7 @@ export default function Profile() {
           return;
         }
 
-        const response = await fetch(`${BACKEND_URL}/api/auth/profile`, {
+        const response = await fetch(`${BACKEND_URL}/api/profile`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function Profile() {
           return;
         }
 
-        const res = await fetch(`${BACKEND_URL}/api/auth/recurringexpenses`, {
+        const res = await fetch(`${BACKEND_URL}/api/recurringexpenses`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

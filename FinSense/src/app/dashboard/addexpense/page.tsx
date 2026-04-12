@@ -27,7 +27,7 @@ export default function AddExpense() {
       }
 
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/auth/recurringexpenses`, {
+        const response = await axios.get(`${API_BASE_URL}/api/recurringexpenses`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -89,7 +89,7 @@ export default function AddExpense() {
 
       // API call to save the expense to the backend
       await axios.post(
-        `${API_BASE_URL}/api/auth/addexpense`,
+        `${API_BASE_URL}/api/addexpense`,
         expenseData,
         {
           headers: {
@@ -135,7 +135,7 @@ export default function AddExpense() {
     }
 
     try {
-      await axios.put(`${API_BASE_URL}/api/auth/update-recurring/${expenseId}`, null, {
+      await axios.put(`${API_BASE_URL}/api/update-recurring/${expenseId}`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
