@@ -55,8 +55,9 @@ export default function Login() {
         return;
       }
 
-      const { token } = await response.json();
+      const { token, refreshToken } = await response.json();
       localStorage.setItem("token", token);
+      localStorage.setItem("refreshToken", refreshToken);
       setSuccess("Login successful! Redirecting...");
       
       // Dispatch custom event to notify header about authentication

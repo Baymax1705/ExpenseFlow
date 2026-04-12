@@ -42,6 +42,7 @@ export default function Profile() {
   const [recurringExpenses, setRecurringExpenses] = useState<RecurringExpense[]>([]);
   const [recurringLoading, setRecurringLoading] = useState(false);
   const [recurringError, setRecurringError] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -67,7 +68,8 @@ export default function Profile() {
             setUser(prevUser => ({
               ...prevUser,
               name: data.user.name,
-              email: data.user.email
+              email: data.user.email,
+              profileImage: data.user.profileImage || ""
             }));
           }
         } else {
@@ -128,13 +130,41 @@ export default function Profile() {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setUser((prevUser) => ({ ...prevUser, profileImage: reader.result as string }));
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64String = reader.result as string;
+      setUser((prevUser) => ({ ...prevUser, profileImage: base64String }));
+      
+      try {
+        setIsUploading(true);
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${BACKEND_URL}/api/profile`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({ profileImage: base64String })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user && data.user.profileImage) {
+            setUser((prev) => ({ ...prev, profileImage: data.user.profileImage }));
+            window.dispatchEvent(new Event("userAuthenticated"));
+          }
+        } else {
+          console.error("Failed to upload image");
+        }
+      } catch (err) {
+        console.error("Error uploading image:", err);
+      } finally {
+        setIsUploading(false);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const renderContent = () => {
@@ -164,6 +194,11 @@ export default function Profile() {
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
                   <div className="relative group">
                     <div className="w-32 h-32 bg-gradient-to-br from-teal-500 to-teal-400 text-white rounded-[2rem] flex items-center justify-center text-5xl font-black shadow-xl shadow-teal-500/30 overflow-hidden ring-4 ring-slate-50 relative z-10 transition-transform group-hover:scale-105">
+                      {isUploading && (
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-20">
+                           <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                      )}
                       {user.profileImage ? (
                         <Image
                           src={user.profileImage}
@@ -172,7 +207,7 @@ export default function Profile() {
                           className="object-cover"
                         />
                       ) : (
-                        user.name.charAt(0)
+                        <span className="z-0">{user.name.charAt(0)}</span>
                       )}
                     </div>
                     

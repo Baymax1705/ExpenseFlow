@@ -30,6 +30,8 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password?: string;
+  profileImage?: string;
+  refreshToken?: string;
   expenses: IExpense[];
   monthlyPlans: IMonthlyPlan[];
 }
@@ -62,6 +64,8 @@ const userSchema = new Schema<IUser>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  profileImage: { type: String, default: '' },
+  refreshToken: { type: String, default: '' },
   expenses: [expenseSchema],
   monthlyPlans: [monthlyPlanSchema],
 });

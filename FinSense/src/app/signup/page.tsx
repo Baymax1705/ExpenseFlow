@@ -108,8 +108,9 @@ export default function Signup() {
         return;
       }
 
-      const { token } = await response.json();
+      const { token, refreshToken } = await response.json();
       localStorage.setItem("token", token);
+      localStorage.setItem("refreshToken", refreshToken);
       setSuccess("Account created successfully! Redirecting...");
       
       window.dispatchEvent(new CustomEvent("userAuthenticated"));

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import connectDB from '@/lib/db';
 import User from '@/models/User';
 import OTP from '@/models/OTP';
+import { generateTokens } from '@/utils/auth';
 
 export async function POST(req: Request) {
   try {
@@ -27,23 +27,30 @@ export async function POST(req: Request) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const { accessToken, refreshToken } = generateTokens('placeholder', email);
+
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
+      refreshToken,
     });
 
     await newUser.save();
     await OTP.deleteMany({ email });
 
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error('JWT_SECRET is not defined');
+    // Re-generate tokens with the real user ID
+    const { accessToken: finalAccess, refreshToken: finalRefresh } = generateTokens(
+      String(newUser._id),
+      newUser.email
+    );
+    newUser.refreshToken = finalRefresh;
+    await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id, email: newUser.email }, secret, {
-      expiresIn: '1d',
-    });
-
-    return NextResponse.json({ message: 'User created successfully', token }, { status: 201 });
+    return NextResponse.json(
+      { message: 'User created successfully', token: finalAccess, refreshToken: finalRefresh },
+      { status: 201 }
+    );
   } catch (error: any) {
     console.error(error);
     return NextResponse.json({ message: 'Server error', error: error.message }, { status: 500 });

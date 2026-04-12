@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import connectDB from '@/lib/db';
 import User from '@/models/User';
+import { generateTokens } from '@/utils/auth';
 
 export async function POST(req: Request) {
   try {
@@ -23,14 +23,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'Invalid email or password' }, { status: 400 });
     }
 
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error('JWT_SECRET is not defined');
+    const { accessToken, refreshToken } = generateTokens(String(user._id), user.email);
 
-    const token = jwt.sign({ id: user._id, email: user.email }, secret, {
-      expiresIn: '1d',
-    });
+    user.refreshToken = refreshToken;
+    await user.save();
 
-    return NextResponse.json({ message: 'Login successful', token }, { status: 200 });
+    return NextResponse.json(
+      { message: 'Login successful', token: accessToken, refreshToken },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.error(error);
     return NextResponse.json({ message: 'Server error', error: error.message }, { status: 500 });
