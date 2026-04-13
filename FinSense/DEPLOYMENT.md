@@ -2,6 +2,60 @@
 
 This guide covers deploying FinSense on a Linux VM using Docker and Nginx.
 
+---
+
+## ⚡ Quick Redeploy (Already Set Up? Start Here)
+
+> **Use this every time you push new code and want to redeploy on the VM.**
+
+```bash
+# SSH into your VM first
+ssh user@your-vm-ip
+cd ~/aman/FinSense/FinSense   # adjust path if different
+```
+
+```bash
+# 1. Pull latest code from GitHub
+git pull origin main
+
+# 2. ⚠️  Verify .env has correct values (--env-file overrides Dockerfile defaults!)
+grep -E "^PORT|^NODE_ENV" .env
+# Must show:
+#   PORT=3001
+#   NODE_ENV=production
+# If wrong, fix it:
+#   sed -i 's/PORT=.*/PORT=3001/' .env
+#   sed -i 's/NODE_ENV=.*/NODE_ENV=production/' .env
+
+# 3. Stop and remove the old container
+docker stop finsense-app
+docker rm finsense-app
+
+# 4. Rebuild the Docker image with latest code
+docker build -t finsense .
+
+# 5. Start the new container
+docker run -d \
+  --name finsense-app \
+  --restart unless-stopped \
+  --network host \
+  --env-file .env \
+  finsense
+
+# 6. Verify it's running on port 3001
+docker logs finsense-app
+curl -I http://localhost:3001
+```
+
+> If the build seems to use old cached code, force a full rebuild:
+> ```bash
+> docker build --no-cache -t finsense .
+> ```
+
+✅ Done. Visit **https://finsense.akt9802.in** — your new code is live.
+
+---
+
 ## Prerequisites
 
 - Docker installed on your server
