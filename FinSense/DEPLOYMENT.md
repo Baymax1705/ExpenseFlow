@@ -13,7 +13,7 @@ This guide walks you through deploying **FinSense** on a Linux VM using Docker a
 | Docker Compose | v2.x+ (plugin, not standalone) |
 | RAM | 1 GB (2 GB recommended) |
 | Disk | 5 GB free |
-| Open Ports | 80, 443 (optional), 3000 |
+| Open Ports | 80, 443 (optional), 3001 |
 
 ---
 
@@ -139,13 +139,13 @@ docker compose logs -f
 
 ```bash
 # Check if the app is responding
-curl http://localhost:3000
+curl http://localhost:3001
 
 # Check health endpoint
-curl http://localhost:3000/api/health
+curl http://localhost:3001/api/health
 ```
 
-Open in browser: `http://<your-vm-ip>:3000`
+Open in browser: `http://<your-vm-ip>:3001`
 
 ---
 
@@ -167,7 +167,7 @@ server {
     server_name your-domain.com;   # or your VM IP
 
     location / {
-        proxy_pass         http://localhost:3000;
+        proxy_pass         http://localhost:3001;
         proxy_http_version 1.1;
         proxy_set_header   Upgrade $http_upgrade;
         proxy_set_header   Connection 'upgrade';
@@ -246,10 +246,10 @@ docker compose logs finsense
 ```
 Check for missing env variables or failed DB connections.
 
-### Port 3000 already in use
+### Port 3001 already in use
 ```bash
-sudo lsof -i :3000
-# Kill the conflicting process or change the port in docker-compose.yml
+sudo lsof -i :3001
+# Kill the conflicting process or change the host port in docker-compose.yml
 ```
 
 ### Build fails (bcrypt native module)
