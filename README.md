@@ -193,8 +193,11 @@ npm run dev
 ## 📄 License
 This project is licensed under the MIT License.
 
+<<<<<<< HEAD
 ## 👥 Authors
 - **baymax1705** - *Sole owner & maintainer* - [GitHub Profile](https://github.com/baymax1705)
 
+=======
+>>>>>>> cbb92af54dc88331d38b67ab5dd6c048a9393eb6
 ---
 **Built with ❤️ for better financial management**
