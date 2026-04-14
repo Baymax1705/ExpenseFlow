@@ -1,4 +1,4 @@
-# 💰 FinSense - Intelligent Financial Analysis Platform
+# 💰 ExpenseFlow - Intelligent Financial Analysis Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.5-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)](https://reactjs.org/)
@@ -6,7 +6,7 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?style=flat-square&logo=mongodb)](https://www.mongodb.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 
-FinSense is a premium, intelligent, and user-friendly financial analytics platform that empowers users to make smarter spending decisions through comprehensive expense tracking, budget planning, and beautiful, responsive UI/UX.
+ExpenseFlow is a premium, intelligent, and user-friendly financial analytics platform that empowers users to make smarter spending decisions through comprehensive expense tracking, budget planning, and beautiful, responsive UI/UX.
 
 ## 📋 Table of Contents
 
@@ -67,7 +67,7 @@ FinSense is a premium, intelligent, and user-friendly financial analytics platfo
 ## 📁 Project Structure
 
 ```
-FinSense/
+ExpenseFlow/
 │
 ├── 📁 backend/                    # Node.js/Express backend
 │   ├── 📁 config/                # MongoDB configuration
@@ -108,8 +108,8 @@ FinSense/
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/akt9802/FinSense.git
-cd FinSense
+git clone https://github.com/akt9802/ExpenseFlow.git
+cd ExpenseFlow
 
 # Install frontend
 npm install
@@ -123,7 +123,7 @@ cd ..
 ### 2. Environment Setup
 Create `.env` in the root (ensure exact paths based on your deployment):
 ```env
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/finsense
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/expenseflow
 JWT_SECRET=your-secure-jwt-secret-key
 PORT=5000
 NODE_ENV=development
