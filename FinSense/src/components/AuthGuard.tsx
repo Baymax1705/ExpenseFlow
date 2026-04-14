@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-const PUBLIC_ROUTES = ["/login", "/signup", "/forgot-password"];
+const PUBLIC_ROUTES = ["/", "/login", "/signup", "/forgot-password", "/offline"];
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const isPublicRoute = PUBLIC_ROUTES.some((route) =>
-      pathname.startsWith(route)
+      route === "/" ? pathname === "/" : pathname.startsWith(route)
     );
 
     if (!token && !isPublicRoute) {
