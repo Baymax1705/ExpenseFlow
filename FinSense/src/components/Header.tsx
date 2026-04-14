@@ -76,7 +76,7 @@ export default function Header() {
       window.removeEventListener("userAuthenticated", handleUserAuthenticated);
       window.removeEventListener("sessionExpired", handleSessionExpired);
     };
-  }, []);
+  }, [router]);
 
   const handleLogout = async () => {
     try {
