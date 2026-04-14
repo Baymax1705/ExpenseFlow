@@ -86,7 +86,7 @@ export default function PWAInstallBanner() {
         <div style={bannerStyle}>
           <span style={{ fontSize: "1.75rem" }}>📲</span>
           <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: "700", fontSize: "0.9rem" }}>Install FinSense</div>
+            <div style={{ fontWeight: "700", fontSize: "0.9rem" }}>Install ExpenseFlow</div>
             <div style={{ fontSize: "0.78rem", opacity: 0.88, marginTop: "2px" }}>
               Tap <strong>Share</strong> → <strong>Add to Home Screen</strong>
             </div>
@@ -123,7 +123,7 @@ export default function PWAInstallBanner() {
       <div style={bannerStyle}>
         <span style={{ fontSize: "1.75rem" }}>📲</span>
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: "700", fontSize: "0.9rem" }}>Install FinSense</div>
+          <div style={{ fontWeight: "700", fontSize: "0.9rem" }}>Install ExpenseFlow</div>
           <div style={{ fontSize: "0.78rem", opacity: 0.88, marginTop: "2px" }}>
             Add to home screen for the best experience
           </div>

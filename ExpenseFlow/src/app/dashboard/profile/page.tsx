@@ -223,7 +223,7 @@ export default function Profile() {
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-50 text-teal-600 rounded-full text-sm font-bold mb-4">
                       <FiMail size={14} /> {user.email}
                     </div>
-                    <p className="text-sm font-medium text-slate-500">Manage your FinSense profile, settings, and personal data securely from this dashboard.</p>
+                    <p className="text-sm font-medium text-slate-500">Manage your ExpenseFlow profile, settings, and personal data securely from this dashboard.</p>
                   </div>
                   
                   <div className="hidden md:block">
@@ -277,7 +277,7 @@ export default function Profile() {
             <div className="p-12 bg-slate-50 rounded-3xl border border-slate-200 border-dashed flex flex-col items-center justify-center text-center">
                <FiActivity size={32} className="text-slate-300 mb-4" />
                <h3 className="text-lg font-bold text-slate-700 mb-2">No Past Data Gathered</h3>
-               <p className="text-sm text-slate-500 max-w-sm">Once you complete a full month with FinSense, your comparative analytics will appear right here.</p>
+               <p className="text-sm text-slate-500 max-w-sm">Once you complete a full month with ExpenseFlow, your comparative analytics will appear right here.</p>
             </div>
           </div>
         );

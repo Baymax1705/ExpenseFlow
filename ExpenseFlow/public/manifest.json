@@ -1,7 +1,7 @@
 {
-  "name": "FinSense — Smart Finance Manager",
-  "short_name": "FinSense",
-  "description": "Track your income, expenses, and budgets with FinSense.",
+  "name": "ExpenseFlow — Smart Finance Manager",
+  "short_name": "ExpenseFlow",
+  "description": "Track your income, expenses, and budgets with ExpenseFlow.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

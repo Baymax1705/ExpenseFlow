@@ -88,7 +88,7 @@ export default function Login() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-400 shadow-lg shadow-teal-500/30 flex items-center justify-center text-white text-xl font-bold tracking-tighter ring-4 ring-white/10 mb-6">
                 FS
               </div>
-              <h3 className="text-3xl font-extrabold tracking-tight">Why people love FinSense</h3>
+              <h3 className="text-3xl font-extrabold tracking-tight">Why people love ExpenseFlow</h3>
             </div>
             
             <ul className="space-y-6">

@@ -142,7 +142,7 @@ export default function Signup() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-400 shadow-lg shadow-teal-500/30 flex items-center justify-center text-white text-xl font-bold tracking-tighter ring-4 ring-white/10 mb-6">
                 FS
               </div>
-              <h3 className="text-3xl font-extrabold tracking-tight">Join FinSense today</h3>
+              <h3 className="text-3xl font-extrabold tracking-tight">Join ExpenseFlow today</h3>
             </div>
             
             <ul className="space-y-6">
@@ -258,7 +258,7 @@ export default function Signup() {
                   <FiCheckCircle size={14} className="absolute text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" strokeWidth={3} />
                 </div>
                 <span className="text-sm font-medium text-slate-600 select-none">
-                  I agree to FinSense's <a href="#" className="font-bold text-teal-600 hover:text-teal-700">Terms of Service</a> and <a href="#" className="font-bold text-teal-600 hover:text-teal-700">Privacy Policy</a>
+                  I agree to ExpenseFlow's <a href="#" className="font-bold text-teal-600 hover:text-teal-700">Terms of Service</a> and <a href="#" className="font-bold text-teal-600 hover:text-teal-700">Privacy Policy</a>
                 </span>
               </label>
 

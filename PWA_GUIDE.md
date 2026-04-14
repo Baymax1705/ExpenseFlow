@@ -1,13 +1,13 @@
-# 📱 PWA (Progressive Web App) — Complete Guide for FinSense
+# 📱 PWA (Progressive Web App) — Complete Guide for ExpenseFlow
 
-> **What you'll learn:** What PWA is, why it matters, and how to fully implement it in your Next.js FinSense app — step by step.
+> **What you'll learn:** What PWA is, why it matters, and how to fully implement it in your Next.js ExpenseFlow app — step by step.
 
 ---
 
 ## 📖 Table of Contents
 
 1. [What is a PWA?](#1-what-is-a-pwa)
-2. [Why Add PWA to FinSense?](#2-why-add-pwa-to-finsense)
+2. [Why Add PWA to ExpenseFlow?](#2-why-add-pwa-to-expenseflow)
 3. [How PWA Works (Core Concepts)](#3-how-pwa-works-core-concepts)
 4. [What You Already Have](#4-what-you-already-have)
 5. [Step-by-Step Implementation](#5-step-by-step-implementation)
@@ -31,9 +31,9 @@
 A **Progressive Web App (PWA)** is a website that behaves like a native mobile/desktop app.
 
 Think of it this way:
-- You visit `finsense.com` in Chrome on your phone
-- Chrome shows a popup: **"Add FinSense to Home Screen"**
-- You tap it → FinSense gets installed like an app
+- You visit `expenseflow.com` in Chrome on your phone
+- Chrome shows a popup: **"Add ExpenseFlow to Home Screen"**
+- You tap it → ExpenseFlow gets installed like an app
 - You can open it from your home screen, it has its own icon, no browser bar
 - It even **works offline** (shows cached data or a nice offline page)
 
@@ -50,13 +50,13 @@ Think of it this way:
 
 ---
 
-## 2. Why Add PWA to FinSense?
+## 2. Why Add PWA to ExpenseFlow?
 
-FinSense is a **financial management app** — users check it frequently. PWA gives:
+ExpenseFlow is a **financial management app** — users check it frequently. PWA gives:
 
 - ✅ **Fast loading** — Assets cached by Service Worker, loads instantly even on slow internet
 - ✅ **Offline support** — Users can view their last loaded dashboard data without internet
-- ✅ **Installable** — Users can add FinSense to their phone/desktop home screen
+- ✅ **Installable** — Users can add ExpenseFlow to their phone/desktop home screen
 - ✅ **Better UX** — Fullscreen mode (no browser address bar), feels like a real app
 - ✅ **Push Notifications** — (future) Notify users about budget limits, transaction alerts
 
@@ -111,7 +111,7 @@ You just need to **configure and wire them up** properly. Follow the steps below
 > ⚠️ You already have these installed, but run this to make sure everything is up to date:
 
 ```bash
-cd FinSense   # make sure you're in the project root (where package.json is)
+cd ExpenseFlow   # make sure you're in the project root (where package.json is)
 
 npm install @ducanh2912/next-pwa workbox-webpack-plugin
 ```
@@ -124,9 +124,9 @@ Create the file `/public/manifest.json`:
 
 ```json
 {
-  "name": "FinSense — Smart Finance Manager",
-  "short_name": "FinSense",
-  "description": "Track your finances, manage budgets, and gain insights with FinSense.",
+  "name": "ExpenseFlow — Smart Finance Manager",
+  "short_name": "ExpenseFlow",
+  "description": "Track your finances, manage budgets, and gain insights with ExpenseFlow.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -190,7 +190,7 @@ Create the file `/public/manifest.json`:
       "src": "/screenshots/dashboard.png",
       "sizes": "1280x720",
       "type": "image/png",
-      "label": "FinSense Dashboard"
+      "label": "ExpenseFlow Dashboard"
     }
   ]
 }
@@ -324,13 +324,13 @@ const geistMono = Geist_Mono({
 
 // SEO Metadata
 export const metadata: Metadata = {
-  title: "FinSense — Smart Finance Manager",
-  description: "Track your income, expenses, and budgets with FinSense.",
+  title: "ExpenseFlow — Smart Finance Manager",
+  description: "Track your income, expenses, and budgets with ExpenseFlow.",
   manifest: "/manifest.json",         // Links the PWA manifest
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "FinSense",
+    title: "ExpenseFlow",
   },
   icons: {
     icon: [
@@ -568,7 +568,7 @@ export default function PWAInstallBanner() {
     >
       <span style={{ fontSize: "2rem" }}>📲</span>
       <div style={{ flex: 1 }}>
-        <div style={{ fontWeight: "bold" }}>Install FinSense</div>
+        <div style={{ fontWeight: "bold" }}>Install ExpenseFlow</div>
         <div style={{ fontSize: "0.85rem", opacity: 0.85 }}>
           Add to home screen for the best experience
         </div>
@@ -718,7 +718,7 @@ Your existing Docker + Nginx setup is already compatible! Just make sure:
 
 1. **Build the Docker image** after adding PWA config:
 ```bash
-docker build -t finsense:latest .
+docker build -t expenseflow:latest .
 ```
 
 2. **HTTPS is configured** (already done with Nginx + SSL) — PWA requires HTTPS ✅
@@ -746,7 +746,7 @@ location = /sw.js {
 
 | Action | File |
 |--------|------|
-| ✏️ Modify | `FinSense/next.config.ts` |
+| ✏️ Modify | `ExpenseFlow/next.config.ts` |
 | ✏️ Modify | `FinSense/src/app/layout.tsx` |
 | 🆕 Create | `FinSense/public/manifest.json` |
 | 🆕 Create | `FinSense/public/icons/` (all 8 PNG icons) |

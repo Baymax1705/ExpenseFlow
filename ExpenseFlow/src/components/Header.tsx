@@ -110,10 +110,10 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 hover:opacity-90 transition-opacity">
               <div className="bg-white rounded-full p-1.5 shadow-md">
-                <Image src="/logo-mark.svg" alt="FinSense" width={28} height={28} />
+                <Image src="/logo-mark.svg" alt="ExpenseFlow" width={28} height={28} />
               </div>
               <div className="leading-tight">
-                <p className="text-base font-bold text-white leading-none">FinSense</p>
+                <p className="text-base font-bold text-white leading-none">ExpenseFlow</p>
                 <p className="text-[10px] text-slate-400 leading-none mt-0.5 hidden sm:block">Dashboard</p>
               </div>
             </Link>
@@ -257,10 +257,10 @@ export default function Header() {
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 hover:opacity-90 transition-opacity min-w-0">
             <div className="bg-white rounded-full p-1.5 shadow-md shrink-0">
-              <Image src="/logo-mark.svg" alt="FinSense" width={28} height={28} />
+              <Image src="/logo-mark.svg" alt="ExpenseFlow" width={28} height={28} />
             </div>
             <div className="leading-tight min-w-0">
-              <p className="text-base font-bold text-white leading-none">FinSense</p>
+              <p className="text-base font-bold text-white leading-none">ExpenseFlow</p>
               <p className="text-[10px] text-slate-400 leading-none mt-0.5 hidden sm:block">
                 Intelligent Financial Analytics
               </p>

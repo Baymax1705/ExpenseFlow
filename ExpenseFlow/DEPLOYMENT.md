@@ -1,6 +1,6 @@
-# 🚀 FinSense — VM Deployment Guide
+# 🚀 ExpenseFlow — VM Deployment Guide
 
-This guide covers deploying FinSense on a Linux VM using Docker and Nginx.
+This guide covers deploying ExpenseFlow on a Linux VM using Docker and Nginx.
 
 ---
 
@@ -11,7 +11,7 @@ This guide covers deploying FinSense on a Linux VM using Docker and Nginx.
 ```bash
 # SSH into your VM first
 ssh user@your-vm-ip
-cd ~/aman/FinSense/FinSense   # adjust path if different
+cd ~/baymax1705/ExpenseFlow   # adjust path if different
 ```
 
 ```bash
@@ -52,7 +52,7 @@ curl -I http://localhost:3001
 > docker build --no-cache -t finsense .
 > ```
 
-✅ Done. Visit **https://finsense.akt9802.in** — your new code is live.
+✅ Done. Visit **https://expenseflow.baymax1705.in** — your new code is live.
 
 ---
 
@@ -115,8 +115,8 @@ docker --version
 ## 2️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/akt9802/FinSense.git
-cd FinSense/FinSense
+git clone https://github.com/baymax1705/ExpenseFlow.git
+cd ExpenseFlow/ExpenseFlow
 ```
 
 ---
@@ -138,7 +138,7 @@ PORT=3001
 NODE_ENV=production
 
 # Database
-MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/finsense?retryWrites=true&w=majority
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/expenseflow?retryWrites=true&w=majority
 
 # JWT
 JWT_SECRET=<your_strong_jwt_secret>
@@ -150,7 +150,7 @@ SMTP_PORT=587
 SMTP_USER=<your_brevo_smtp_user>
 SMTP_PASS=<your_brevo_smtp_password>
 SMTP_FROM_EMAIL=<your_verified_sender_email>
-SMTP_FROM_NAME=Finsense Team
+SMTP_FROM_NAME=ExpenseFlow Team
 
 # Cloudinary
 CLOUDINARY_CLOUD_NAME=<your_cloud_name>
@@ -159,8 +159,8 @@ CLOUDINARY_API_SECRET=<your_api_secret>
 CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
 
 # Frontend (public vars — baked at build time)
-NEXT_PUBLIC_BACKEND_URL=https://finsense.akt9802.in
-NEXT_PUBLIC_API_BASE_URL=https://finsense.akt9802.in
+NEXT_PUBLIC_BACKEND_URL=https://expenseflow.baymax1705.in
+NEXT_PUBLIC_API_BASE_URL=https://expenseflow.baymax1705.in
 ```
 
 > ⚠️ **Never commit your `.env` file to Git.** It is already in `.gitignore`.
@@ -221,13 +221,13 @@ sudo nano /etc/nginx/sites-available/finsense
 Paste this config:
 
 ```nginx
-upstream finsense_app {
+upstream expenseflow_app {
     server localhost:3001;
     keepalive 64;
 }
 
 server {
-    server_name finsense.akt9802.in www.finsense.akt9802.in;
+    server_name expenseflow.baymax1705.in www.expenseflow.baymax1705.in;
 
     # Security headers
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -245,7 +245,7 @@ server {
     client_max_body_size 10M;
 
     location / {
-        proxy_pass http://finsense_app;
+        proxy_pass http://expenseflow_app;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "";
@@ -258,25 +258,25 @@ server {
     }
 
     location /_next/static {
-        proxy_pass http://finsense_app;
+        proxy_pass http://expenseflow_app;
         proxy_set_header Host $host;
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
     location /_next/image {
-        proxy_pass http://finsense_app;
+        proxy_pass http://expenseflow_app;
         proxy_set_header Host $host;
         add_header Cache-Control "public, max-age=3600";
     }
 
     location = /favicon.ico {
-        proxy_pass http://finsense_app;
+        proxy_pass http://expenseflow_app;
         access_log off;
         log_not_found off;
     }
 
     location = /robots.txt {
-        proxy_pass http://finsense_app;
+        proxy_pass http://expenseflow_app;
         access_log off;
         log_not_found off;
     }
@@ -287,22 +287,22 @@ server {
     }
 
     listen 443 ssl;
-    ssl_certificate /etc/letsencrypt/live/finsense.akt9802.in/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/finsense.akt9802.in/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/expenseflow.baymax1705.in/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/expenseflow.baymax1705.in/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 
 server {
-    if ($host = www.finsense.akt9802.in) {
+    if ($host = www.expenseflow.baymax1705.in) {
         return 301 https://$host$request_uri;
     }
-    if ($host = finsense.akt9802.in) {
+    if ($host = expenseflow.baymax1705.in) {
         return 301 https://$host$request_uri;
     }
 
     listen 80;
-    server_name finsense.akt9802.in www.finsense.akt9802.in;
+    server_name expenseflow.baymax1705.in www.expenseflow.baymax1705.in;
     return 404;
 }
 ```
@@ -321,12 +321,12 @@ sudo systemctl reload nginx
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d finsense.akt9802.in -d www.finsense.akt9802.in
+sudo certbot --nginx -d expenseflow.baymax1705.in -d www.expenseflow.baymax1705.in
 ```
 
 Certbot will auto-configure HTTPS and set up auto-renewal.
 
-Visit **https://finsense.akt9802.in** in your browser.
+Visit **https://expenseflow.baymax1705.in** in your browser.
 
 ---
 

@@ -97,10 +97,10 @@ http://localhost:3001   ← app is here on the host
     │
     ▼
 Nginx (reverse proxy)
-    localhost:3001 → https://finsense.akt9802.in
+    localhost:3001 → https://expenseflow.baymax1705.in
     │
     ▼
-Internet → https://finsense.akt9802.in ✅
+Internet → https://expenseflow.baymax1705.in ✅
 ```
 
 ---

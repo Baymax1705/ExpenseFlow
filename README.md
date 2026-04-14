@@ -108,7 +108,7 @@ ExpenseFlow/
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/akt9802/ExpenseFlow.git
+git clone https://github.com/baymax1705/ExpenseFlow.git
 cd ExpenseFlow
 
 # Install frontend
@@ -194,7 +194,7 @@ npm run dev
 This project is licensed under the MIT License.
 
 ## 👥 Authors
-- **akt9802** - *Initial work* - [GitHub Profile](https://github.com/akt9802)
+- **baymax1705** - *Sole owner & maintainer* - [GitHub Profile](https://github.com/baymax1705)
 
 ---
 **Built with ❤️ for better financial management**

@@ -94,7 +94,7 @@ export default function Home() {
 
             <Reveal delay={300}>
               <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                FinSense isn't just an expense tracker. We use lightweight machine learning to categorize your spending, identify patterns, and provide actionable tips—helping you save more without the stress.
+                ExpenseFlow isn't just an expense tracker. We use lightweight machine learning to categorize your spending, identify patterns, and provide actionable tips—helping you save more without the stress.
               </p>
             </Reveal>
 
@@ -205,7 +205,7 @@ export default function Home() {
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-teal-600/30 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
               </h2>
               <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Intelligent tools to rethink your wallet.</h3>
-              <p className="text-slate-600 text-lg">FinSense does the heavy lifting of categorizing expenses and spotting trends.</p>
+              <p className="text-slate-600 text-lg">ExpenseFlow does the heavy lifting of categorizing expenses and spotting trends.</p>
             </div>
           </Reveal>
 
@@ -235,7 +235,7 @@ export default function Home() {
             <div>
               <Reveal>
                 <h2 className="text-teal-400 font-bold tracking-wide uppercase text-sm mb-3">Workflow</h2>
-                <h3 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">How FinSense Works</h3>
+                <h3 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">How ExpenseFlow Works</h3>
                 <p className="text-slate-400 text-lg mb-12 leading-relaxed font-medium">
                   We keep things simple: you input your spending, we analyze it instantly, and provide clear next steps. No confusing spreadsheets required.
                 </p>
@@ -310,13 +310,13 @@ export default function Home() {
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">What Early Users Say</h3>
-              <p className="text-slate-600 text-lg">Real stories from people saving more with FinSense.</p>
+              <p className="text-slate-600 text-lg">Real stories from people saving more with ExpenseFlow.</p>
             </div>
           </Reveal>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "Rhea, Bengaluru", quote: "FinSense showed me I was overspending on subscriptions. I cancelled two and saved ₹800/month instantly." },
+              { name: "Rhea, Bengaluru", quote: "ExpenseFlow showed me I was overspending on subscriptions. I cancelled two and saved ₹800/month instantly." },
               { name: "Kunal, Pune", quote: "The suggestions are practical and clear — not generic finance-speak. Finally an app that makes total sense." },
               { name: "Sneha, Hyderabad", quote: "Stunning visuals — I finally understand where I can cut costs without sacrificing my everyday lifestyle." }
             ].map((t, i) => (
@@ -353,7 +353,7 @@ export default function Home() {
               { q: "Is my financial data secure?", a: "Yes, we use secure authentication with JWT tokens and password encryption. Your data is strictly private and never shared with generic third parties." },
               { q: "How does the ML categorization work?", a: "We run a lightweight decision tree model on your spending distribution to label your habits as Healthy, Moderate, or Risky with transparent confidence scores." },
               { q: "Can I set up recurring expenses?", a: "Yes! You can mark expenses as recurring. This helps you track regular payments like rent and subscriptions automatically, projecting your future spending." },
-              { q: "Is FinSense free to use?", a: "Absolutely. We believe basic financial clarity and actionable insights should be accessible to everyone via a stunning interface." },
+              { q: "Is ExpenseFlow free to use?", a: "Absolutely. We believe basic financial clarity and actionable insights should be accessible to everyone via a stunning interface." },
             ].map((faq, i) => (
               <Reveal key={i} delay={i * 100} className="h-full">
                 <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-teal-200 hover:bg-white hover:shadow-lg transition-all duration-300 h-full flex flex-col">
@@ -376,7 +376,7 @@ export default function Home() {
               
               <h3 className="text-4xl md:text-6xl font-black mb-6 relative z-10 tracking-tight">Make Your Money Make Sense</h3>
               <p className="text-xl text-teal-50 max-w-2xl mx-auto mb-10 relative z-10 font-medium">
-                Stop guessing where your paycheck goes. Get precision clarity in minutes with FinSense.
+                Stop guessing where your paycheck goes. Get precision clarity in minutes with ExpenseFlow.
               </p>
               <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-4">
                 <Link href="/signup" className="px-10 py-5 bg-white text-teal-700 hover:bg-slate-50 hover:text-teal-800 rounded-2xl font-bold shadow-2xl transition-all hover:-translate-y-1 active:scale-95 text-center text-lg inline-flex justify-center items-center gap-2 group/btn">

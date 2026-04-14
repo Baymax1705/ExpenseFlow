@@ -9,14 +9,14 @@ import PWAInstallBanner from "../components/PWAInstallBanner";
 
 // ── SEO + PWA Metadata ────────────────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "FinSense — Smart Finance Manager",
+  title: "ExpenseFlow — Smart Finance Manager",
   description:
-    "Track your income, expenses, and budgets intelligently with FinSense.",
+    "Track your income, expenses, and budgets intelligently with ExpenseFlow.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "FinSense",
+    title: "ExpenseFlow",
   },
   icons: {
     icon: [
