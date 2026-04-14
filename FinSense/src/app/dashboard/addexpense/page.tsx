@@ -93,18 +93,7 @@ export default function AddExpense() {
     }
 
     try {
-      // Decode the token and fetch the id field
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      const userId = payload.id; // Extract `id` from the token payload
-
-      if (!userId) {
-        setError("User ID not found in token.");
-        setLoading(false);
-        return;
-      }
-
       const expenseData = {
-        userId, // Include userId in the payload
         date,
         amount: Number(amount),
         merchant,
