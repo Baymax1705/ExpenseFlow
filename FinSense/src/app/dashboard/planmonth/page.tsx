@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { apiClient, getToken } from "@/utils/apiClient";
 import { 
   FiCalendar, 
   FiPlus, 
@@ -49,22 +50,13 @@ export default function PlanMonth() {
   const [activeSidebar, setActiveSidebar] = useState<string | null>(null);
   const [copySource, setCopySource] = useState<string>("");
 
-  // Get JWT token from localStorage
-  const getAuthToken = () => {
-    return localStorage.getItem('token');
-  };
-
   // Shared function to fetch all plans
   const fetchAllPlans = useCallback(async () => {
     try {
-      const token = getAuthToken();
-      if (!token) return;
+      if (!getToken()) return;
 
-      const response = await fetch('/api/plan-months', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+      const response = await apiClient('/api/plan-months', {
+        method: 'GET',
       });
 
       if (response.ok) {
@@ -85,14 +77,10 @@ export default function PlanMonth() {
   useEffect(() => {
     const fetchPlanByMonth = async (monthToFetch: string) => {
       try {
-        const token = getAuthToken();
-        if (!token) return;
+        if (!getToken()) return;
 
-        const response = await fetch(`/api/plan-month/${monthToFetch}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+        const response = await apiClient(`/api/plan-month/${monthToFetch}`, {
+          method: 'GET',
         });
 
         if (response.ok) {
@@ -139,8 +127,7 @@ export default function PlanMonth() {
 
     setSaving(true);
     try {
-      const token = getAuthToken();
-      if (!token) {
+      if (!getToken()) {
         setError("Please login to save plans");
         setSaving(false);
         return;
@@ -155,12 +142,8 @@ export default function PlanMonth() {
         others: Number(catBudgets.others || 0),
       };
 
-      const response = await fetch('/api/plan-month', {
+      const response = await apiClient('/api/plan-month', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           month,
           totalBudget: Number(totalBudget),
@@ -200,18 +183,13 @@ export default function PlanMonth() {
     if (!confirm(`Delete plan for ${new Date(month + "-01").toLocaleString(undefined, { month: 'long', year: 'numeric' })}? This cannot be undone.`)) return;
     
     try {
-      const token = getAuthToken();
-      if (!token) {
+      if (!getToken()) {
         setError("Please login to delete plans");
         return;
       }
 
-      const response = await fetch(`/api/plan-month/${month}`, {
+      const response = await apiClient(`/api/plan-month/${month}`, {
         method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
       });
 
       if (response.ok) {
