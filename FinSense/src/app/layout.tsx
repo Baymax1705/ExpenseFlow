@@ -1,22 +1,11 @@
 // Root layout must be a Server Component — NO "use client" here
 // Auth redirect is handled by AuthGuard (client component) below
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AuthGuard from "../components/AuthGuard";
 import PWAInstallBanner from "../components/PWAInstallBanner";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // ── SEO + PWA Metadata ────────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -56,9 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-slate-800`}
-      >
+      <body className="antialiased bg-white text-slate-800 font-sans">
         {/* AuthGuard handles token check + redirect to /login */}
         <AuthGuard>
           <Header />
